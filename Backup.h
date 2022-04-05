@@ -1,7 +1,3 @@
-//
-// Created by PC on 4. 4. 2022.
-//
-
 #include <string>
 #include <iostream>
 #include <queue>
@@ -19,7 +15,7 @@ public:
     void writeToFile();
 
 private:
-
+    queue<string> front;
 };
 
 

@@ -1,7 +1,3 @@
-//
-// Created by PC on 4. 4. 2022.
-//
-
 #include "GoodsQueue.h"
 #include <string>
 #include <iostream>
@@ -9,18 +5,34 @@
 
 using namespace std;
 
-void GoodsQueue ::pushToFront(float a){
+void GoodsQueue ::add(float n) {
 
+    node *tmp = new node;
+    tmp->data = n;
+    tmp->next = NULL;
 
+    if(head == NULL)
+    {
+        head = tmp;
+        tail = tmp;
+    }
+    else
+    {
+        tail->next = tmp;
+        tail = tail->next;
+    }
 }
 
-bool GoodsQueue ::sellFromFront(int a){
+void GoodsQueue::print() {
 
+    node*tmp;
 
-}
+    tmp = head;
 
-void GoodsQueue ::sumGoods(){
-
+    while (tmp != NULL){
+        cout << tmp -> data << endl;
+        tmp = tmp->next;
+    }
 
 
 }
