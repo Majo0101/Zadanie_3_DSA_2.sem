@@ -14,12 +14,13 @@ using namespace std;
 class GoodsQueue {
 
 public:
-    void pushToFront(int a);
+    void pushToFront(float a);
     bool sellFromFront(int a);
+
     void sumGoods();
 
 private:
-    queue<int> Goods;
+
 };
 
 

@@ -19,7 +19,7 @@ public:
     void writeToFile();
 
 private:
-    queue<string> front;
+
 };
 
 
