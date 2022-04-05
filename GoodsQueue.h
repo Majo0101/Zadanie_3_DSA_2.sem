@@ -23,6 +23,11 @@ public:
 
     void add(float n);
     void print();
+    void removeLastItem();
+    void removeFirstItem();
+    int sumUp();
+    void summary();
+
 
 private:
     node *head,*tail;
