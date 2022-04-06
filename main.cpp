@@ -19,7 +19,8 @@ public:
 
     Backup backup;
 
-    bool accesWtoFile = false;
+    bool accessWtoFile = false;
+    bool accessRfrmFile = true;
 
     void readData(){
 
@@ -98,11 +99,27 @@ public:
                 }
             }
         }
+        cout << "The data was loaded correctly" << endl;
+
+        File.close();
     }
 
     void buyGoods(int type,int pieces,float price){
-
-
+        if (type == 1){
+            for (int i = 0; i < pieces; i++) {
+                type1.add(price);
+            }
+        }else if(type == 2){
+            for (int i = 0; i < pieces; i++) {
+                type2.add(price);
+            }
+        }else if(type == 3){
+            for (int i = 0; i < pieces; i++) {
+                type3.add(price);
+            }
+        }else{
+            cout << endl << "Bad type of goods" << endl << endl;
+        }
     }
 
     void showDataForType(int type){
@@ -214,8 +231,14 @@ int main(){
                 break;
 
             case 'n':
-                obj.readData();
-                obj.accesWtoFile = true;
+                if (obj.accessRfrmFile){
+                    obj.readData();
+                    obj.accessRfrmFile = false;
+                    obj.accessWtoFile = true;
+                }else{
+                    cout << "You can't mix DATA before write" << endl;
+                }
+
                 i--;
                 break;
 
@@ -225,8 +248,10 @@ int main(){
                 break;
 
             case 'w':
-                if (obj.accesWtoFile){
+                if (obj.accessWtoFile){
                     obj.backup.writeToFile();
+                    obj.accessRfrmFile = true;
+                    obj.accessWtoFile = false;
                 }else{
                     cout << "You need read data first with n" << endl;
                 }
@@ -243,8 +268,6 @@ int main(){
 
         fflush(stdin);
     }
-
-
 
     return 0;
 }

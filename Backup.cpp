@@ -24,6 +24,8 @@ void Backup ::writeToFile() {
     }else{
         cout << endl << "Unable write to file !!" << endl;
     }
+
+    File.close();
 }
 
 void Backup ::writeToFifo(string in) {
