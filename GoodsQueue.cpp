@@ -104,6 +104,10 @@ void GoodsQueue::summary() {
 
     tmp = head;
 
+    if(head == NULL){
+        cout << "No goods" << endl << endl;
+    }
+
     if (head != NULL){
         while (tmp != NULL) {
             if (max < tmp->data) {
@@ -142,7 +146,7 @@ void GoodsQueue::summary() {
                 tmp = tmp->next;
             }
 
-            cout << endl << endl << "Price: " << max << " Pieces: " << counter;
+            cout << "Price: " << max << " Pieces: " << counter << endl;
 
             max = maxSecond;
             maxSecond = 0;
@@ -159,7 +163,7 @@ void GoodsQueue::summary() {
             }
             tmp = tmp->next;
         }
-        cout << endl << endl << "Price: "<< min << " Pieces: " << counter;
+        cout << "Price: "<< min << " Pieces: " << counter << endl;
         counter = 0;
     }
 }

@@ -5,6 +5,7 @@
 #include <string>
 #include <fstream>
 
+
 #define file "Data.txt"
 
 using namespace std;
@@ -18,6 +19,7 @@ public:
 
     Backup backup;
 
+    bool accesWtoFile = false;
 
     void readData(){
 
@@ -98,23 +100,149 @@ public:
         }
     }
 
-    void writeData(int type, float n){
+    void buyGoods(int type,int pieces,float price){
 
 
     }
 
+    void showDataForType(int type){
 
+        if (type == 1){
+            type1.summary();
+        }else if (type == 2){
+            type2.summary();
+        }else if (type == 3){
+            type3.summary();
+        }else{
+            cout << endl << "Bad type of goods" << endl << endl;
+        }
+    }
+
+    void showData(){
+
+        cout << "Type 1"<< endl;
+        type1.summary();
+        cout << endl << endl << "Type 2" << endl;
+        type2.summary();
+        cout << endl << endl << "Type 3" << endl;
+        type3.summary();
+
+    }
+
+    void sellGoods(int type, int pieces){
+        if (type == 1){
+            if (type1.sumUp() > pieces){
+                for (int i = 0; i < pieces; i++) {
+                    type1.removeFIFOitem();
+                }
+            }else{
+                cout << endl << "Lack of goods" << endl;
+            }
+        }else if (type == 2){
+            if (type2.sumUp() > pieces){
+                for (int i = 0; i < pieces; i++) {
+                    type2.removeFIFOitem();
+                }
+            }else{
+                cout << endl << "Lack of goods" << endl;
+            }
+        }else if (type == 3){
+            if (type3.sumUp() > pieces){
+                for (int i = 0; i < pieces; i++) {
+                    type3.removeFIFOitem();
+                }
+            }else{
+                cout << endl << "Lack of goods" << endl;
+            }
+        }else{
+            cout << endl << "Bad type of goods" << endl << endl;
+        }
+    }
 
 };
-
 
 int main(){
 
     Read obj;
 
-    obj.readData();
+    char choice;
+    int type;
+    int pieces;
+    float price;
 
-    obj.backup.writeToFile();
+    for (int i = 0; i < 3; ++i) {
+
+        cout << endl << endl
+        << "Enter your choice:" << endl
+        << "i -  Show inventory for type of goods " << endl
+        << "k -  Buy goods by type" << endl
+        << "p -  Sell goods by type" << endl
+        << "n -  Load inventory from file" << endl
+        << "s -  Show goods inventory" << endl
+        << "w -  Write inventory to file" << endl
+        << "e -  EXIT" << endl << endl;
+
+        cin >> choice;
+
+        switch (choice) {
+
+            case 'i' :
+                cout << "Enter type of goods" << endl;
+                cin >> type;
+                obj.showDataForType(type);
+                i--;
+                break;
+
+            case 'k' :
+                cout << "Enter type of goods" << endl;
+                cin >> type;
+                cout << "Enter number of pieces" <<endl;
+                cin >> pieces;
+                cout << "Enter price" << endl;
+                cin >> price;
+                obj.buyGoods(type,pieces,price);
+                i--;
+                break;
+
+            case 'p':
+                cout << "Enter type of goods" << endl;
+                cin >> type;
+                cout << "Enter number of pieces" <<endl;
+                cin >> pieces;
+                obj.sellGoods(type,pieces);
+                i--;
+                break;
+
+            case 'n':
+                obj.readData();
+                obj.accesWtoFile = true;
+                i--;
+                break;
+
+            case 's':
+                obj.showData();
+                i--;
+                break;
+
+            case 'w':
+                if (obj.accesWtoFile){
+                    obj.backup.writeToFile();
+                }else{
+                    cout << "You need read data first with n" << endl;
+                }
+                i--;
+                break;
+
+            case 'e':
+                i = 5;
+                break;
+
+            default:
+                cout << endl <<  "Bad input" << endl;
+        }
+
+        fflush(stdin);
+    }
 
 
 
