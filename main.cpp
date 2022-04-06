@@ -5,7 +5,6 @@
 #include <string>
 #include <fstream>
 
-
 #define file "Data.txt"
 
 using namespace std;
@@ -19,8 +18,7 @@ public:
 
     Backup backup;
 
-    bool accessWtoFile = false;
-    bool accessRfrmFile = true;
+    bool accessRW_File = true;
 
     void readData(){
 
@@ -182,6 +180,9 @@ int main(){
 
     Read obj;
 
+    stringstream backup;
+
+    string backUp;
     char choice;
     int type;
     int pieces;
@@ -218,6 +219,12 @@ int main(){
                 cout << "Enter price" << endl;
                 cin >> price;
                 obj.buyGoods(type,pieces,price);
+
+                backup << type << " K "<< pieces << " " << price;
+                backUp = backup.str();
+                obj.backup.writeToFifo(backUp);
+                backup.str("");
+
                 i--;
                 break;
 
@@ -231,10 +238,9 @@ int main(){
                 break;
 
             case 'n':
-                if (obj.accessRfrmFile){
+                if (obj.accessRW_File){
                     obj.readData();
-                    obj.accessRfrmFile = false;
-                    obj.accessWtoFile = true;
+                    obj.accessRW_File = false;
                 }else{
                     cout << "You can't mix DATA before write" << endl;
                 }
@@ -248,10 +254,9 @@ int main(){
                 break;
 
             case 'w':
-                if (obj.accessWtoFile){
+                if (!obj.accessRW_File){
                     obj.backup.writeToFile();
-                    obj.accessRfrmFile = true;
-                    obj.accessWtoFile = false;
+                    obj.accessRW_File = true;
                 }else{
                     cout << "You need read data first with n" << endl;
                 }
