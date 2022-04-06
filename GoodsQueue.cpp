@@ -142,7 +142,7 @@ void GoodsQueue::summary() {
                 tmp = tmp->next;
             }
 
-            cout << endl << endl << "cislo " << max << " counter " << counter;
+            cout << endl << endl << "Price: " << max << " Pieces: " << counter;
 
             max = maxSecond;
             maxSecond = 0;
@@ -159,7 +159,7 @@ void GoodsQueue::summary() {
             }
             tmp = tmp->next;
         }
-        cout << endl << endl << "cislo "<< min << " counter " << counter;
+        cout << endl << endl << "Price: "<< min << " Pieces: " << counter;
         counter = 0;
     }
 }
@@ -173,7 +173,7 @@ bool GoodsQueue::removeSelected(float n){
     if (tmp != NULL && tmp->data == n){
         head = tmp->next;
         free(tmp);
-        return true;
+        return false;
     }else{
         while (tmp != NULL && tmp->data != n){
             prev = tmp;
@@ -181,11 +181,11 @@ bool GoodsQueue::removeSelected(float n){
         }
 
         if (tmp == NULL){
-            return false;
+            return true;
         }else{
             prev->next = tmp->next;
             free(tmp);
-            return true;
+            return false;
         }
     }
 }
