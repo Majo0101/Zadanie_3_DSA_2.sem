@@ -39,7 +39,7 @@ void GoodsQueue::print() {
     }
 }
 
-void GoodsQueue::removeLastItem() {
+void GoodsQueue::removeLIFOitem() {
 
     node *tmp;
     node *lastNode;
@@ -79,7 +79,7 @@ int GoodsQueue::sumUp() {
     return counter;
 }
 
-void GoodsQueue::removeFirstItem() {
+void GoodsQueue::removeFIFOitem() {
 
     node*tmp;
 
@@ -161,5 +161,31 @@ void GoodsQueue::summary() {
         }
         cout << endl << endl << "cislo "<< min << " counter " << counter;
         counter = 0;
+    }
+}
+
+bool GoodsQueue::removeSelected(float n){
+    node*tmp;
+    node*prev;
+
+    tmp = head;
+
+    if (tmp != NULL && tmp->data == n){
+        head = tmp->next;
+        free(tmp);
+        return true;
+    }else{
+        while (tmp != NULL && tmp->data != n){
+            prev = tmp;
+            tmp = tmp->next;
+        }
+
+        if (tmp == NULL){
+            return false;
+        }else{
+            prev->next = tmp->next;
+            free(tmp);
+            return true;
+        }
     }
 }

@@ -23,10 +23,11 @@ public:
 
     void add(float n);
     void print();
-    void removeLastItem();
-    void removeFirstItem();
+    void removeLIFOitem();
+    void removeFIFOitem();
     int sumUp();
     void summary();
+    bool removeSelected(float n);
 
 
 private:
