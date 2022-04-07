@@ -145,32 +145,80 @@ public:
     }
 
     void sellGoods(int type, int pieces){
+
+        float tmp;
+        float compare = INT16_MIN;
+        int counter = 0;
+        int i;
+
         if (type == 1){
-            if (type1.sumUp() > pieces){
-                for (int i = 0; i < pieces; i++) {
-                    type1.removeFIFOitem();
-                }
+            if (type1.sumUp() >= pieces){
+
+                writeSellData(pieces, type);
+
             }else{
                 cout << endl << "Lack of goods" << endl;
             }
         }else if (type == 2){
-            if (type2.sumUp() > pieces){
-                for (int i = 0; i < pieces; i++) {
-                    type2.removeFIFOitem();
-                }
+            if (type2.sumUp() >= pieces){
+
+                writeSellData(pieces,type);
+
             }else{
                 cout << endl << "Lack of goods" << endl;
             }
         }else if (type == 3){
-            if (type3.sumUp() > pieces){
-                for (int i = 0; i < pieces; i++) {
-                    type3.removeFIFOitem();
-                }
+            if (type3.sumUp() >= pieces){
+
+                writeSellData(pieces ,type);
+
             }else{
                 cout << endl << "Lack of goods" << endl;
             }
         }else{
             cout << endl << "Bad type of goods" << endl << endl;
+        }
+    }
+
+    void writeSellData(int pieces , int type){
+
+        float tmp;
+        float compare = INT16_MIN;
+        int counter = 0;
+        int i;
+        string Sell;
+
+        stringstream sell;
+
+
+        for (i = 0; i < pieces; i++) {
+
+            if (type == 1) {tmp = type1.removeFIFOitem();}
+            if (type == 2) {tmp = type2.removeFIFOitem();}
+            if (type == 3) {tmp = type3.removeFIFOitem();}
+
+            counter++;
+
+            if (tmp != compare){
+                if (i != 0) {
+                    cout << "Pcs: " << counter << "  Price: " << compare << endl;
+                    sell << type << " P " << counter << " " << compare;
+                    Sell = sell.str();
+                    backup.writeToFifo(Sell);
+                    sell.str("");
+                }else{
+                    counter = 1;
+                }
+                compare = tmp;
+                counter = 0;
+            }
+        }
+        if (i != 0){
+            cout << "Pcs: " << counter + 1 << "  Price: " << compare << endl;
+            sell << type << " P " << counter +1 << " " << compare;
+            Sell = sell.str();
+            backup.writeToFifo(Sell);
+            sell.str("");
         }
     }
 
@@ -264,7 +312,12 @@ int main(){
                 break;
 
             case 'e':
-                i = 5;
+                if (!obj.accessRW_File){
+                    cout << "Write data before exit" << endl;
+                }else{
+                    i = 5;
+                }
+                i--;
                 break;
 
             default:

@@ -24,11 +24,11 @@ public:
     void add(float n);
     void print();
     void removeLIFOitem();
-    void removeFIFOitem();
+    float removeFIFOitem();
     int sumUp();
     void summary();
     bool removeSelected(float n);
-
+    int differentNumber(int n);
 
 private:
     node *head,*tail;

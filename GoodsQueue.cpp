@@ -79,17 +79,23 @@ int GoodsQueue::sumUp() {
     return counter;
 }
 
-void GoodsQueue::removeFIFOitem() {
+float GoodsQueue::removeFIFOitem() {
 
     node*tmp;
+
+    float giveMeNumber;
 
     if(head != NULL){
 
         tmp = head;
+        giveMeNumber = tmp ->data;
         head = head->next;
         free(tmp);
+
+        return giveMeNumber;
     }else{
         cout << endl << "No goods" << endl;
+        return -0;
     }
 }
 
@@ -192,4 +198,26 @@ bool GoodsQueue::removeSelected(float n){
             return false;
         }
     }
+}
+
+int GoodsQueue::differentNumber(int n){
+
+    node*tmp;
+
+    tmp = head;
+
+    float max = tmp->data;
+    int counter = 1;
+
+    while(n != 0){
+        if(max != tmp->data){
+            max = tmp->data;
+            counter++;
+        }
+        tmp = tmp->next;
+        n--;
+    }
+
+    return counter;
+
 }
