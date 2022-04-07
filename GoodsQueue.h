@@ -29,6 +29,7 @@ public:
     void summary();
     bool removeSelected(float n);
     int differentNumber(int n);
+    float totalPrice();
 
 private:
     node *head,*tail;

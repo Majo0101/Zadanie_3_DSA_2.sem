@@ -137,10 +137,13 @@ public:
 
         cout << "Type 1"<< endl;
         type1.summary();
+        cout << "Total price: " << type1.totalPrice();
         cout << endl << endl << "Type 2" << endl;
         type2.summary();
+        cout << "Total price: " << type2.totalPrice();
         cout << endl << endl << "Type 3" << endl;
         type3.summary();
+        cout << "Total price: " << type3.totalPrice();
 
     }
 

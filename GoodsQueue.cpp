@@ -221,3 +221,19 @@ int GoodsQueue::differentNumber(int n){
     return counter;
 
 }
+
+float GoodsQueue::totalPrice() {
+
+    node *tmp;
+
+    tmp = head;
+
+    float totalPrice = 0;
+
+    while (tmp != NULL) {
+        totalPrice += tmp->data;
+        tmp = tmp->next;
+    }
+
+    return totalPrice;
+}
