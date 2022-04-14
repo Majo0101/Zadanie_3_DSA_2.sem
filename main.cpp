@@ -225,6 +225,10 @@ public:
         }
     }
 
+    ~Read(){
+        cout << "Read class was destroyed" << endl;
+    }
+
 };
 
 int main(){
@@ -251,13 +255,19 @@ int main(){
         << "w -  Write inventory to file" << endl
         << "e -  EXIT" << endl << endl;
 
-        cin >> choice;
+            cin >> choice;
 
         switch (choice) {
 
             case 'i' :
                 cout << "Enter type of goods" << endl;
                 cin >> type;
+                while(cin.fail()) {
+                    cout << "Error" << endl;
+                    cin.clear();
+                    cin.ignore(256,'\n');
+                    cin >> type;
+                }
                 obj.showDataForType(type);
                 i--;
                 break;
@@ -265,10 +275,28 @@ int main(){
             case 'k' :
                 cout << "Enter type of goods" << endl;
                 cin >> type;
+                while(cin.fail()) {
+                    cout << "Error" << endl;
+                    cin.clear();
+                    cin.ignore(256,'\n');
+                    cin >> type;
+                }
                 cout << "Enter number of pieces" <<endl;
                 cin >> pieces;
+                while(cin.fail()) {
+                    cout << "Error" << endl;
+                    cin.clear();
+                    cin.ignore(256,'\n');
+                    cin >> pieces;
+                }
                 cout << "Enter price" << endl;
                 cin >> price;
+                while(cin.fail()) {
+                    cout << "Error" << endl;
+                    cin.clear();
+                    cin.ignore(256,'\n');
+                    cin >> price;
+                }
                 obj.buyGoods(type,pieces,price);
 
                 backup << type << " K "<< pieces << " " << price;
@@ -282,8 +310,20 @@ int main(){
             case 'p':
                 cout << "Enter type of goods" << endl;
                 cin >> type;
+                while(cin.fail()) {
+                    cout << "Error" << endl;
+                    cin.clear();
+                    cin.ignore(256,'\n');
+                    cin >> type;
+                }
                 cout << "Enter number of pieces" <<endl;
                 cin >> pieces;
+                while(cin.fail()) {
+                    cout << "Error" << endl;
+                    cin.clear();
+                    cin.ignore(256,'\n');
+                    cin >> pieces;
+                }
                 obj.sellGoods(type,pieces);
                 i--;
                 break;

@@ -33,5 +33,3 @@ void Backup ::writeToFifo(string in) {
     front.push(in);
 
 }
-
-

@@ -11,8 +11,13 @@ using namespace std;
 class Backup {
 
 public:
-    void writeToFifo(string in);
-    void writeToFile();
+    Backup(){}
+    ~Backup(){
+        cout << "Backup class was destroyed" << endl;
+    }
+
+    void writeToFifo(string in);   //store data before writing
+    void writeToFile();     //write data to file
 
 private:
     queue<string> front;
